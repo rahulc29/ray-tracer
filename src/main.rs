@@ -42,7 +42,7 @@ where
             let point = vec3::Color {
                 x: (i as f64) / ((width - 1) as f64),
                 y: (j as f64) / ((height - 1) as f64),
-                z: ((i * j) as f64).sin() * width as f64,
+                z: ((i * i + j * j) as f64).sin() * width as f64,
             };
             writeln!(writer, "{}", point)?;
         }

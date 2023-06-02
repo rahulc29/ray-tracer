@@ -1,4 +1,4 @@
-OUTPUT_FILE = gay
+OUTPUT_FILE = sinusoidal6
 GENERATED_FORMAT = ppm
 RENDERED_FORMAT = png
 build:

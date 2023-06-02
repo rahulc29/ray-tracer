@@ -5,6 +5,7 @@ use std::io::{stderr, stdout, BufWriter, Write};
 use std::ops::{AddAssign, DivAssign, Index, IndexMut, MulAssign, Neg};
 
 mod vec3;
+mod ray;
 
 fn hello_graphics<W, P>(
     width: u32,

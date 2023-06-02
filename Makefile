@@ -2,7 +2,7 @@ OUTPUT_FILE = exponential
 GENERATED_FORMAT = ppm
 RENDERED_FORMAT = png
 build:
-	cargo build
+	cargo build --verbose
 run:
 	cargo run > $(OUTPUT_FILE).$(GENERATED_FORMAT)
 	convert $(OUTPUT_FILE).$(GENERATED_FORMAT) $(OUTPUT_FILE).$(RENDERED_FORMAT)
@@ -14,3 +14,5 @@ docs:
 	cargo doc
 fmt:
 	cargo fmt
+test:
+	cargo test --verbose

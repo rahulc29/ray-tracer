@@ -18,4 +18,4 @@ $$
     \end{pmatrix}
 $$
 
-![sinusoidal.ppm](Sinusoidal sample)
+![Sinusoidal](sinusoidal.png)

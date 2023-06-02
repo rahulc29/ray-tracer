@@ -20,9 +20,14 @@ $$
     \end{pmatrix}
 $$
 
-![Sinusoidal](sinusoidal.png)
-![Sinusoidal2](sinusoidal2.png)
-![Sinusoidal3](sinusoidal3.png)
-![Sinusoidal4](sinusoidal4.png)
-![Sinusoidal5](sinusoidal5.png)
-![Sinusoidal6](sinusoidal6.png)
+![Sinusoidal](rendered/sinusoidal.png)
+![Sinusoidal2](rendered/sinusoidal2.png)
+![Sinusoidal3](rendered/sinusoidal3.png)
+![Sinusoidal4](rendered/sinusoidal4.png)
+![Sinusoidal5](rendered/sinusoidal5.png)
+![Sinusoidal6](rendered/sinusoidal6.png)
+
+### Linear Gradient
+
+![Linear 1](rendered/ray-trace-1.png)
+![Linear 2](rendered/linear-gradient-1.png)

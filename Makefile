@@ -1,4 +1,4 @@
-OUTPUT_FILE = sinusoidal6
+OUTPUT_FILE = exponential
 GENERATED_FORMAT = ppm
 RENDERED_FORMAT = png
 build:

@@ -17,3 +17,5 @@ $$
     W\sin(ij)
     \end{pmatrix}
 $$
+
+![sinusoidal.ppm](Sinusoidal sample)

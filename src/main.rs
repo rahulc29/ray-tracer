@@ -40,28 +40,31 @@ fn ray_colour(ray: Ray) -> Color {
     };
     let radius = 0.00125;
     let t = hits_sphere(sphere_center, radius, ray);
-    if let Some(t) = t {
-        let normal = (ray.at(t) - sphere_center).unit_vector();
-        0.5 * Color {
-            x: normal.x + 1.0,
-            y: normal.y + 1.0,
-            z: normal.z + 1.0,
+    match t {
+        Some(t) => {
+            let normal = (ray.at(t) - sphere_center).unit_vector();
+            0.5 * Color {
+                x: normal.x + 1.0,
+                y: normal.y + 1.0,
+                z: normal.z + 1.0,
+            }
         }
-    } else {
-        let ray_direction_unit = ray.direction.unit_vector();
-        let t = 0.5 * (ray_direction_unit.y + 1.0);
-        linear_interpolation(
-            Color {
-                x: 1.0,
-                y: 1.0,
-                z: 1.0,
-            },
-            Color {
-                x: 0.5,
-                y: 0.7,
-                z: 1.0,
-            },
-        )(t)
+        None => {
+            let ray_direction_unit = ray.direction.unit_vector();
+            let t = 0.5 * (ray_direction_unit.y + 1.0);
+            linear_interpolation(
+                Color {
+                    x: 1.0,
+                    y: 1.0,
+                    z: 1.0,
+                },
+                Color {
+                    x: 0.5,
+                    y: 0.7,
+                    z: 1.0,
+                },
+            )(t)
+        }
     }
 }
 

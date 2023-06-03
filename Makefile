@@ -1,4 +1,4 @@
-OUTPUT_FILE = linear-gradient-1
+OUTPUT_FILE = sphere-1
 GENERATED_FORMAT = ppm
 RENDERED_FORMAT = png
 build:

@@ -19,45 +19,50 @@ fn linear_interpolation(a: Vec3, b: Vec3) -> impl FnOnce(f64) -> Vec3 {
 /// Check if ray hits sphere
 /// If ray hits sphere quadratic equation has at least one root
 /// So discriminant is non-negative
-fn hits_sphere(center: Point3, radius: f64, ray: Ray) -> bool {
+fn hits_sphere(center: Point3, radius: f64, ray: Ray) -> Option<f64> {
     let oc = ray.origin - center;
     let a = ray.direction.dot(&ray.direction);
     let b = 2.0 * oc.dot(&ray.direction);
     let c = oc.length() - radius * radius;
     let discriminant = b * b - 4.0 * a * c;
-    discriminant >= 0.0
+    if discriminant < 0.0 {
+        None
+    } else {
+        Some((-b - discriminant.sqrt()) / (2.0 * a))
+    }
 }
 
 fn ray_colour(ray: Ray) -> Color {
-    if hits_sphere(
-        Point3 {
-            x: 0.0,
-            y: 0.0,
-            z: -1.0,
-        },
-        0.5,
-        ray,
-    ) {
-        return Color {
-            x: 1.0,
-            y: 0.0,
-            z: 0.0,
-        };
+    let sphere_center = Point3 {
+        x: -1.750,
+        y: -1.750,
+        z: -0.0125,
+    };
+    let radius = 0.00125;
+    let t = hits_sphere(sphere_center, radius, ray);
+    if let Some(t) = t {
+        let normal = (ray.at(t) - sphere_center).unit_vector();
+        0.5 * Color {
+            x: normal.x + 1.0,
+            y: normal.y + 1.0,
+            z: normal.z + 1.0,
+        }
+    } else {
+        let ray_direction_unit = ray.direction.unit_vector();
+        let t = 0.5 * (ray_direction_unit.y + 1.0);
+        linear_interpolation(
+            Color {
+                x: 1.0,
+                y: 1.0,
+                z: 1.0,
+            },
+            Color {
+                x: 0.5,
+                y: 0.7,
+                z: 1.0,
+            },
+        )(t)
     }
-    let ray_direction_unit = ray.direction.unit_vector();
-    let t = 0.5 * (ray_direction_unit.y + 1.0);
-    linear_interpolation(
-        Color {
-            x: 1.0,
-            y: 1.0,
-            z: 1.0,
-        },
-        Color {
-            x: 0.5,
-            y: 0.7,
-            z: 1.0,
-        },
-    )(t)
 }
 
 fn render_scene<W, P>(
@@ -96,12 +101,12 @@ where
     };
     let lower_left_corner = origin
         - (horizontal / 2.0
-        + vertical / 2.0
-        + Point3 {
-            x: 0.0,
-            y: 0.0,
-            z: focal_length,
-        });
+            + vertical / 2.0
+            + Point3 {
+                x: 0.0,
+                y: 0.0,
+                z: focal_length,
+            });
     // Write PPM Header
     let max_colour = 255;
     write_ppm_header(&mut writer, width, height, max_colour)?;
